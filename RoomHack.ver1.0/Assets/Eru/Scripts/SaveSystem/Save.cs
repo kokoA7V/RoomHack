@@ -73,10 +73,7 @@ public class Save : MonoBehaviour
         SaveData saveData = new SaveData();
 
         //ゲームデータの値をセーブデータに代入
-        saveData.testInt = GameData.testInt;
-        saveData.testFloat = GameData.testFloat;
-        saveData.testString = GameData.testString;
-        saveData.testBool = GameData.testBool;
+
 
         return saveData;
     }

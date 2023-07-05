@@ -77,10 +77,7 @@ public class Read : MonoBehaviour
     //データの読み込み（反映）
     private void ReadData(SaveData saveData)
     {
-        GameData.testInt = saveData.testInt;
-        GameData.testFloat = saveData.testFloat;
-        GameData.testString = saveData.testString;
-        GameData.testBool = saveData.testBool;
+
     }
 
 

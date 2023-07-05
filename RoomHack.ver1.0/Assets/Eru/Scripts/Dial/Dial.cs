@@ -25,6 +25,8 @@ public class Dial : MonoBehaviour
 
     void Update()
     {
+        if (dialManager.missFlg) return;
+
         rotationZ = transform.rotation.eulerAngles.z;
 
         //ƒ_ƒCƒ„ƒ‹”»’è
