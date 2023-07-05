@@ -5,9 +5,22 @@ using UnityEngine.UI;
 
 public class NumberManager : MonoBehaviour
 {
+    public int level = 3;
+    public int oneSetTime = 10;
+
     private int[] num = new int[9];
 
+    private int timer;
     private int ans;
+    private int clear;
+
+    private float time = 0;
+
+    [SerializeField]
+    private Text timeText;
+
+    [SerializeField]
+    private Text levelText;
 
     [SerializeField]
     private Text[] text;
@@ -17,29 +30,42 @@ public class NumberManager : MonoBehaviour
 
     void Start()
     {
-        //ランダム
-        List<int> numbers = new List<int> { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
-        List<int> randomizedNumbers = RandomizeList(numbers);
-
-        int i = 0;
-        foreach (int number in randomizedNumbers)
-        {
-            Debug.Log(number);
-            num[i] = number;
-            text[i].text = number.ToString();
-            i++;
-        }
-
-        ans = 1;
+        timer = oneSetTime * level;
+        levelText.text = "LEVEL:" + level.ToString();
+        StartNumber();
+        clear = 0;
     }
 
     void Update()
     {
-        if(ans == 10)
+        time += Time.deltaTime;
+
+        if (ans == 10)
         {
-            Debug.Log("ミッションクリア");
+            clear++;
+            if (clear >= level)
+            {
+                timeText.text = "ミッションクリア";
+                return;
+            }
+            else
+            {
+                StartNumber();
+            }
+        }
+        else if(timer <= 0)
+        {
+            timeText.text = "ミッション失敗";
             return;
         }
+
+        if(time > 1f)
+        {
+            time = 0;
+            timer--;
+            timeText.text = timer.ToString();
+        }
+
         if (Input.GetMouseButtonDown(0))
         {
             Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -64,6 +90,29 @@ public class NumberManager : MonoBehaviour
                 }
             }
         }
+    }
+
+    /// <summary>
+    /// 初期化処理
+    /// </summary>
+    private void StartNumber()
+    {
+        //ランダム
+        List<int> numbers = new List<int> { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+        List<int> randomizedNumbers = RandomizeList(numbers);
+
+        int i = 0;
+        foreach (int number in randomizedNumbers)
+        {
+            num[i] = number;
+            text[i].text = number.ToString();
+            gameObjects[i].GetComponent<SpriteRenderer>().color = Color.gray;
+            i++;
+        }
+
+        timeText.text = timer.ToString();
+
+        ans = 1;
     }
 
     /// <summary>

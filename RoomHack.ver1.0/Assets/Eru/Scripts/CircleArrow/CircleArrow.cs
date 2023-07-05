@@ -4,7 +4,6 @@ public class CircleArrow : MonoBehaviour
 { 
     public CircleArrowManager cam;
 
-    private float rotationSpeed = 5.0f;
     private float rotationZ;
 
     private const float right1 = 252.0f;
@@ -18,13 +17,13 @@ public class CircleArrow : MonoBehaviour
         if (cam.rotationStopFlg) return;
 
         //‰ñ“]
-        transform.Rotate(Vector3.forward * rotationSpeed);
+        transform.Rotate(Vector3.forward * cam.rotationSpeed);
 
         //‹t‰ñ“]ˆ—
         if (cam.rotationFlg)
         {
             cam.rotationFlg = false;
-            rotationSpeed *= -1;
+            cam.rotationSpeed *= -1;
         }
 
         //”’‚¢ƒ‰ƒCƒ“‚É“ü‚Á‚Ä‚¢‚é‚©‚Ì”»’è

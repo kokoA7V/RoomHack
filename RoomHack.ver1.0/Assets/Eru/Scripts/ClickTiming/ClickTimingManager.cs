@@ -9,6 +9,7 @@ public class ClickTimingManager : MonoBehaviour
     public int level = 8;
     public int time = 15;
     public float countTime = 0.25f;
+    public int rand = 75;
 
     public GameObject rod, pointer;
     public Text text;
@@ -32,6 +33,7 @@ public class ClickTimingManager : MonoBehaviour
         checkFlg = new bool[level];
 
         r = 360.0f / level;
+        text.fontSize = 250;
         text.text = time.ToString();
 
         for (int i = 0; i < level; i++)
@@ -44,25 +46,29 @@ public class ClickTimingManager : MonoBehaviour
             poiObj[i] = tmp;
             poiObj[i].GetComponent<Transform>().Rotate(0, 0, r * count);
 
-            checkFlg[i] = false;
+            checkFlg[i] = (Random.value > rand * 0.01f);
+
+            if (checkFlg[i]) rodObj[i].SetActive(false);
+
             count++;
         }
 
         poiObj[point].GetComponentInChildren<SpriteRenderer>().color = Color.red;
-
-        //ランダム
-
     }
 
     void Update()
     {
         if (checkFlg.All(b => b))
         {
-            Debug.Log("ロック解除");
+            text.fontSize = 150;
+            text.text = "解除";
+            return;
         }
         else if (time <= 0)
         {
-            Debug.Log("ミッション失敗");
+            text.fontSize = 150;
+            text.text = "失敗";
+            return;
         }
         else
         {
