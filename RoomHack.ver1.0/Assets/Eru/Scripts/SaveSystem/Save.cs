@@ -84,8 +84,8 @@ public class Save : MonoBehaviour
     private AesManaged GetAesManager()
     {
         //”CˆÓ‚Ì”¼Šp‰p”16•¶š(Read.cs‚Æ“¯‚¶‚â‚Â‚É)
-        string aesIv = "0987654321098765";
-        string aesKey = "1234567890123456";
+        string aesIv = "1542719558231752";
+        string aesKey = "1354816479214838";
 
         AesManaged aes = new AesManaged();
         aes.KeySize = 128;
