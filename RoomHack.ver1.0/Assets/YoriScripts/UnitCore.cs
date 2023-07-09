@@ -2,17 +2,32 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UnitCore : MonoBehaviour
+public class UnitCore : MonoBehaviour, IUnitMove, IUnitShot, IUnitHack, IUnitDamage
 {
-    // Start is called before the first frame update
-    void Start()
+    public float maxHP { get; set; }
+    public float nowHP { get; set; }
+    public int dmgLayer{ get; set; }
+
+    public float moveSpd { get; set; } = 0.3f;
+
+
+    public bool hacked { get; set; } = false;
+    
+    public void HitDmg() { }
+    public void Die() { }
+    public void Shot(int layer, float pow)
     {
         
     }
 
-    // Update is called once per frame
-    void Update()
+    public void StatusDisp()
+    {
+
+    }
+
+    public void UnitMove(float moveSpd)
     {
         
     }
+
 }
