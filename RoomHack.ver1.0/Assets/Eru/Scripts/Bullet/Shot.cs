@@ -12,11 +12,6 @@ public class Shot : MonoBehaviour
     [SerializeField]
     private float shotTime = 0.3f;
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.F)) UnitShot(1, 1, 3);
-    }
-
     public void UnitShot(int layer, int pow , int burst)
     {
         StartCoroutine(enumerator(layer, pow, burst));
