@@ -24,6 +24,8 @@ public class MateController : MonoBehaviour
     private float moveSpd;
     private float pow;
 
+    public LayerMask ltest;
+
 
     enum State
     {
@@ -67,45 +69,6 @@ public class MateController : MonoBehaviour
 
     // いずれ別のクラスにするそれまではここ
 
-    private void OnTriggerStay2D(Collider2D collision)
-    {
-        //Debug.Log("atattayo");
-        // ターゲットポイントがついてるかどうか
-        tagetPnt = collision.gameObject.GetComponent<TargetPoint>();
-        // ついてないならそのまま返す
-        if (tagetPnt == null)
-        {
-            //Debug.Log("ついてないよ");
-            return;
-        }
-        // ついてるならレイを飛ばす
-        else
-        {
-            //Debug.Log("tuiteruyo");
-
-            // Rayを生成
-            Vector3 origin = this.gameObject.transform.position;
-            Vector3 diredtion = collision.gameObject.transform.position - origin;
-            diredtion = diredtion.normalized;
-            Ray ray = new Ray(origin, diredtion * 10);
-
-            // Rayを表示
-            Debug.DrawRay(ray.origin, ray.direction * 10, Color.red);
-
-            // 何か当たったら名前を返す
-            RaycastHit2D hit = Physics2D.Raycast(ray.origin, ray.direction * 10);
-            if (hit.collider.gameObject.name == this.gameObject.name)
-            {
-                Debug.Log("間に何もないよ");
-                string name = hit.collider.gameObject.name; // 衝突した相手オブジェクトの名前を取得
-                Debug.Log(name); // コンソールに表示
-            }
-            else
-            {
-                Debug.Log("何もないよ");
-            }
-        }
-    }
     private void OnCollisionStay2D(Collision2D collision)
     {
         //Debug.Log("atattayo");
@@ -131,20 +94,26 @@ public class MateController : MonoBehaviour
             // Rayを表示
             Debug.DrawRay(ray.origin, ray.direction * 10, Color.red);
             float maxDistance = 10;
-            int layerMask = 0;
+            LayerMask layerMask = LayerMask.GetMask(LayerMask.LayerToName(collision.gameObject.layer)); 
             // 何か当たったら名前を返す
-            RaycastHit2D hit = Physics2D.Raycast(ray.origin, ray.direction * 10,maxDistance,layerMask);
-            tagetPnt = hit.collider.gameObject.GetComponent<TargetPoint>();
-            if (hit.collider.gameObject.layer==1)
+            RaycastHit2D[] hit = Physics2D.RaycastAll(ray.origin, ray.direction * 10,maxDistance);
+            foreach (RaycastHit2D hits in hit )
             {
-                Debug.Log("間に何もないよ");
-                string name = hit.collider.gameObject.name; // 衝突した相手オブジェクトの名前を取得
-                Debug.Log(name); // コンソールに表示
+                if (hits.collider!=null)
+                {
+                    Debug.Log("Hit" + hits.collider.gameObject.name);
+                }
             }
-            else
-            {
-                Debug.Log("何もないよ");
-            }
+            //if (hit)
+            //{
+            //    Debug.Log("間に何もないよ");
+            //    string name = hit.collider.gameObject.name; // 衝突した相手オブジェクトの名前を取得
+            //    Debug.Log(name); // コンソールに表示
+            //}
+            //else
+            //{
+            //    Debug.Log("何もないよ");
+            //}
         }
     }
 }
