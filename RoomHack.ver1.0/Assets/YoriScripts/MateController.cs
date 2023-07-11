@@ -101,7 +101,10 @@ public class MateController : MonoBehaviour
             {
                 if (hits.collider!=null)
                 {
-                    Debug.Log("Hit" + hits.collider.gameObject.name);
+                    if (hits.collider.gameObject.layer != this.gameObject.layer && hits.collider.gameObject.layer == 8)
+                    {
+                        Debug.Log("Hit :" + hits.collider.gameObject.name);
+                    }
                 }
             }
             //if (hit)
