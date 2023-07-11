@@ -6,6 +6,8 @@ public class BulletController : MonoBehaviour,IUnitDamage
     public float nowHP { get; set; }
     public int dmgLayer { get; set; }
 
+    public int pow;
+
     void Start()
     {
         maxHP = 1;
