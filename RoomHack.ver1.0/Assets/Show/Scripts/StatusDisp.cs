@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class StatusDisp : MonoBehaviour
 {
+    public bool hacked = true;
+
     // Start is called before the first frame update
     void Start()
     {
