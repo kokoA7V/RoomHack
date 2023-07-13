@@ -2,13 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class door : MonoBehaviour
+public class door : MonoBehaviour, IUnitHack
 {
+    // インターフェース
+    public bool hacked { get; set; } = false;
+
     public int doorSize = 1;
     public bool isUD = true;
 
     GameObject doorUorL;
     GameObject doorDorR;
+
+    GameObject dUL_Mate;
+    GameObject dUL_Enemy;
+    GameObject dDR_Mate;
+    GameObject dDR_Enemy;
 
     float moveValue = 0;
     float moveSpd = 1;
@@ -16,21 +24,39 @@ public class door : MonoBehaviour
     bool open = false;
     bool close = true;
 
-    // Start is called before the first frame update
     void Start()
     {
         doorUorL = transform.GetChild(0).gameObject;
         doorDorR = transform.GetChild(1).gameObject;
 
-        if(doorSize == 1)
+        dUL_Mate = doorUorL.transform.GetChild(0).gameObject;
+        dUL_Enemy = doorUorL.transform.GetChild(1).gameObject;
+        dDR_Mate = doorDorR.transform.GetChild(0).gameObject;
+        dDR_Enemy = doorDorR.transform.GetChild(1).gameObject;
+
+        if (doorSize == 1)
         {
-            moveValue = 0.16f;
+            moveValue = 0.25f;
         }
     }
 
-    // Update is called once per frame
     void Update()
     {
+        if (hacked)
+        {
+            dUL_Mate.SetActive(true);
+            dUL_Enemy.SetActive(false);
+            dDR_Mate.SetActive(true);
+            dDR_Enemy.SetActive(false);
+        }
+        else
+        {
+            dUL_Mate.SetActive(false);
+            dUL_Enemy.SetActive(true);
+            dDR_Mate.SetActive(false);
+            dDR_Enemy.SetActive(true);
+        }
+
         if (Input.GetKeyDown(KeyCode.UpArrow))
         {
             if (open)
@@ -110,5 +136,11 @@ public class door : MonoBehaviour
 
             close = true;
         }
+    }
+
+    // インターフェース
+    public void StatusDisp()
+    {
+
     }
 }
