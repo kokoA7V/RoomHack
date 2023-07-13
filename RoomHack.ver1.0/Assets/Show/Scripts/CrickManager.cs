@@ -6,14 +6,15 @@ using UnityEngine.UI;
 public class CrickManager : MonoBehaviour
 {
     public GameObject Door;
-    public GameObject ButtonPre;
-    public GameObject HackTitlePre;
-    public GameObject HackedTextPre;
-    public GameObject HackTextPre;
+    public GameObject Button;
+    public GameObject CircleArrowPre;
 
     ButtonController bc;
     CircleArrowManager CirMng;
 
+    bool isCrick = false;
+
+    [SerializeField] GameObject UnHacktext;
     [SerializeField] GameObject Hacktext;
     [SerializeField] GameObject ButtonText;
     [SerializeField] GameObject Canvas;
@@ -21,7 +22,7 @@ public class CrickManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        bc = Button.GetComponent<ButtonController>();
     }
 
     // Update is called once per frame
@@ -33,17 +34,20 @@ public class CrickManager : MonoBehaviour
             Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             RaycastHit2D hit = Physics2D.Raycast(mousePosition, Vector2.zero);
 
-            if (hit.collider != null && hit.collider.gameObject == Door) 
+            if (hit.collider != null && hit.collider.gameObject == Door && !isCrick)
             {
-                Transform canvasTrans = Canvas.transform;// SerializeField�Ŏ擾
-                GameObject door = Instantiate(HackTitlePre, canvasTrans);
-                GameObject obj = Instantiate(ButtonPre, canvasTrans);
-                bc = obj.GetComponent<ButtonController>();
-                RectTransform doorhak = door.GetComponent<RectTransform>();
-                RectTransform rect = obj.GetComponent<RectTransform>();
-                doorhak.anchoredPosition = new Vector3(542, -117, 0);
-                rect.anchoredPosition = new Vector3(784, -180, 0);
+                ButtonText.SetActive(true);
+                UnHacktext.SetActive(true);
+                isCrick = true;
             }
+            if(bc.cama.clearflag == false)
+            {
+                Hacktext.SetActive(true);
+            }
+        }
+        if (bc.isbutclick == true)
+        {
+            UnHacktext.SetActive(false);
         }
     }
 }
