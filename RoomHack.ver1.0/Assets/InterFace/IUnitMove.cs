@@ -4,7 +4,5 @@ using UnityEngine;
 
 public interface IUnitMove 
 {
-    public float moveSpd { get; set; }
-
-    public void UnitMove(float spd);
+    void Shot(int layer, float pow);
 }
