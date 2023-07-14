@@ -119,4 +119,54 @@ public class MateController : MonoBehaviour
             //}
         }
     }
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        //Debug.Log("atattayo");
+        // ターゲットポイントがついてるかどうか
+        tagetPnt = collision.gameObject.GetComponent<TargetPoint>();
+        // ついてないならそのまま返す
+        if (tagetPnt == null)
+        {
+            //Debug.Log("ついてないよ");
+            return;
+        }
+        // ついてるならレイを飛ばす
+        else
+        {
+            //Debug.Log("tuiteruyo");
+
+            // Rayを生成
+            Vector3 origin = this.gameObject.transform.position;
+            Vector3 diredtion = collision.gameObject.transform.position - origin;
+            diredtion = diredtion.normalized;
+            Ray ray = new Ray(origin, diredtion * 10);
+
+            // Rayを表示
+            Debug.DrawRay(ray.origin, ray.direction * 10, Color.red);
+            float maxDistance = 10;
+            LayerMask layerMask = LayerMask.GetMask(LayerMask.LayerToName(collision.gameObject.layer));
+            // 何か当たったら名前を返す
+            RaycastHit2D[] hit = Physics2D.RaycastAll(ray.origin, ray.direction * 10, maxDistance);
+            foreach (RaycastHit2D hits in hit)
+            {
+                if (hits.collider != null)
+                {
+                    if (hits.collider.gameObject.layer != this.gameObject.layer && hits.collider.gameObject.layer == 8)
+                    {
+                        Debug.Log("Hit :" + hits.collider.gameObject.name);
+                    }
+                }
+            }
+            //if (hit)
+            //{
+            //    Debug.Log("間に何もないよ");
+            //    string name = hit.collider.gameObject.name; // 衝突した相手オブジェクトの名前を取得
+            //    Debug.Log(name); // コンソールに表示
+            //}
+            //else
+            //{
+            //    Debug.Log("何もないよ");
+            //}
+        }
+    }
 }
