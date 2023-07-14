@@ -26,6 +26,8 @@ public class cctv : MonoBehaviour, IUnitHack
         startPos.x += areaPos.x < 0 ? areaPos.x : 0;
         startPos.y += areaPos.y < 0 ? areaPos.y : 0;
 
+        Debug.Log(startPos);
+
 
         for (int i = 0; i < length.x; i++)
         {
