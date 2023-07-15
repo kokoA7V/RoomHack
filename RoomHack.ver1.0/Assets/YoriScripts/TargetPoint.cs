@@ -6,7 +6,8 @@ public class TargetPoint : MonoBehaviour
 {
     [SerializeField]
     public int priority;
-    public int layer = 1;
+    public int layer ;
+
     // Start is called before the first frame update
     void Start()
     {

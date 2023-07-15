@@ -19,7 +19,7 @@ public class door : MonoBehaviour, IUnitHack
     GameObject dDR_Enemy;
 
     float moveValue = 0;
-    float moveSpd = 1;
+    //float moveSpd = 1;
 
     bool open = false;
     bool close = true;
