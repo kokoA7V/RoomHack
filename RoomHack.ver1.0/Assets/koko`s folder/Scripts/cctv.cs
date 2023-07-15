@@ -9,32 +9,55 @@ public class cctv : MonoBehaviour, IUnitHack
     GameObject mosic;
     public GameObject mosicPre;
 
+    GameObject CCTV_Mate;
+    GameObject CCTV_Enemy;
+
     public Vector2 areaPos;
 
     private void Start()
     {
         mosic = transform.GetChild(0).gameObject;
-
-        GameObject temp = (GameObject)Instantiate(mosicPre, this.transform.position, Quaternion.identity);
-        temp.transform.parent = mosic.transform;
-
-        Vector2 length;
-        length.x = Mathf.Abs(areaPos.x);
-        length.y = Mathf.Abs(areaPos.y);
+        CCTV_Mate = transform.GetChild(1).gameObject;
+        CCTV_Enemy = transform.GetChild(2).gameObject;
 
         Vector2 startPos = this.transform.position;
         startPos.x += areaPos.x < 0 ? areaPos.x : 0;
         startPos.y += areaPos.y < 0 ? areaPos.y : 0;
 
-        Debug.Log(startPos);
+        Vector2 endPos = this.transform.position;
+        endPos.x += areaPos.x > 0 ? areaPos.x : 0;
+        endPos.y += areaPos.y > 0 ? areaPos.y : 0;
 
+        //Debug.Log("start" + startPos);
+        //Debug.Log("end" + endPos);
 
-        for (int i = 0; i < length.x; i++)
+        Vector2 nowPos;
+
+        for (nowPos.x = startPos.x; nowPos.x <= endPos.x; nowPos.x++)
         {
-            for (int j = 0; j < length.y; j++)
+            for (nowPos.y = startPos.y; nowPos.y <= endPos.y; nowPos.y++)
             {
-
+                GameObject temp = (GameObject)Instantiate(mosicPre, nowPos, Quaternion.identity);
+                temp.transform.parent = mosic.transform;
             }
+        }
+    }
+
+    private void Update()
+    {
+        if (hacked)
+        {
+            CCTV_Mate.SetActive(true);
+            CCTV_Enemy.SetActive(false);
+
+            mosic.SetActive(false);
+        }
+        else
+        {
+            CCTV_Mate.SetActive(false);
+            CCTV_Enemy.SetActive(true);
+
+            mosic.SetActive(true);
         }
     }
 
@@ -42,5 +65,4 @@ public class cctv : MonoBehaviour, IUnitHack
     {
 
     }
-
 }
