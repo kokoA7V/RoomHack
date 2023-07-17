@@ -2,18 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ButtonController : MonoBehaviour
+public class DrButtonController : MonoBehaviour
 {
     public GameObject CrickArrowPre;
-    public GameObject HackTitlePre;
-    public bool isbutclick = false;
-
-    [HideInInspector]
-    public CircleArrowManager cama;
-
-    CrickManager crMng;
-
     GameObject instantiate;
+    public bool drbuttonclick = false;
+
+
+
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -28,9 +25,8 @@ public class ButtonController : MonoBehaviour
     public void OnClick()
     {
         Vector2 ver = instantiate.transform.position;
-        GameObject obj = Instantiate(CrickArrowPre, ver, Quaternion.identity);
-        cama = obj.GetComponent<CircleArrowManager>();
+        GameObject obj = Instantiate(CrickArrowPre, ver, Quaternion.identity); //Door用のギミック
+        drbuttonclick = true;
         Destroy(this.gameObject);
-        isbutclick = true;
     }
 }
