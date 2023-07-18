@@ -12,7 +12,12 @@ public class MateController : MonoBehaviour
     [SerializeField, Header("メソッド用汎用番号")]
     public int methodNo = 0;   // メソッド用汎用番号
 
-    TargetPoint tagetPnt;
+    EnemyCheak emCheak;
+
+    TargetPoint hitsPnt;
+    TargetPoint unitPnt;
+
+    private Rigidbody2D plRb;
 
     // デリゲード
     // 関数を型にするためのもの
@@ -24,16 +29,19 @@ public class MateController : MonoBehaviour
     private float moveSpd;
     private float pow;
 
-
+    // 
     private GameObject unit;
 
-    //int wallLayer =1<<LayerMask.NameToLayer("Wall");
+    private float methodCtr = 0;
+
+    private bool isEm = true;
 
     enum State
     {
         Wait,
         Shot,
         Move,
+        Search,
         Num
     }
     void Start()
@@ -45,21 +53,56 @@ public class MateController : MonoBehaviour
         actFuncTbl[(int)State.Wait] = ActWait;
         actFuncTbl[(int)State.Shot] = ActShot;
         actFuncTbl[(int)State.Move] = ActMove;
+        actFuncTbl[(int)State.Search] = ActSearch;
 
         stateNo = (int)State.Wait;
 
         moveSpd = 10;
+
+        plRb = GetComponent<Rigidbody2D>();
+
+        emCheak = GetComponent<EnemyCheak>();
     }
 
     void Update()
     {
-
+        if (emCheak.EnemyCheck() && isEm)
+        {
+            Debug.Log("もうすぐ止まるよ");
+            methodNo = 0;
+            stateNo = (int)State.Wait;
+            isEm = false;
+        }
+        
         actFuncTbl[stateNo]();
         //Debug.Log("ugoiteru");
     }
     private void ActWait()
     {
-
+        switch (methodNo)
+        {
+            case 0:
+                methodCtr = 0.2f;
+                methodNo++;
+                Debug.Log("待ちに移行");
+                break;
+            case 1:
+                methodCtr -= Time.deltaTime;
+                if (methodCtr <= 0)
+                {
+                    plRb.velocity = Vector3.zero;
+                    plRb.isKinematic = true;
+                    Debug.Log("完全に止まった");
+                    isEm = true;
+                    methodNo++;
+                }
+                break;
+            case 2:
+                Debug.Log("もう動けるよ");
+                plRb.isKinematic = false;
+                break;
+        }
+       
     }
     private void ActShot()
     {
@@ -67,19 +110,67 @@ public class MateController : MonoBehaviour
     }
     private void ActMove()
     {
-        mateCore.Move(moveSpd, unit);
+        switch (methodNo)
+        {
+            case 0:
+                methodCtr = 6;
+                methodNo++;
+                break;
+            case 1:
+                if (unit != null)
+                {
+                    Debug.Log("Move");
+                    mateCore.Move(moveSpd, unit);
+
+                    methodCtr -= Time.deltaTime;
+                }
+                else
+                {
+                    Debug.Log("unit = NULL");
+                    plRb.velocity = Vector3.zero;
+                    stateNo = 0;
+                }
+                if (methodCtr <= 0)
+                {
+                    Debug.Log("とまるよ");
+                    plRb.velocity = Vector3.zero;
+                    plRb.isKinematic = true;
+                    unit = null;
+                    methodNo++;
+                }
+                break;
+            case 2:
+                plRb.isKinematic = false;
+                break;
+        }
+    }
+    void ActSearch()
+    {
+        switch (methodNo)
+        {
+            case 0:
+
+                break;
+        }
     }
 
+    //private void OnTriggerExit2D(Collider2D collision)
+    //{
+    //    Debug.Log("待ちに移行");
+    //    plRb.velocity = Vector3.zero;
+    //    plRb.isKinematic = false;
+    //    stateNo = (int)State.Wait;
+    //}
     // いずれ別のクラスにするそれまではここ
 
- 
+
     private void OnTriggerStay2D(Collider2D collision)
     {
         //Debug.Log("atattayo");
         // ターゲットポイントがついてるかどうか
-        tagetPnt = collision.gameObject.GetComponent<TargetPoint>();
+        hitsPnt = collision.gameObject.GetComponent<TargetPoint>();
         // ついてないならそのまま返す
-        if (tagetPnt == null)
+        if (hitsPnt == null)
         {
             //Debug.Log("ついてないよ");
             return;
@@ -109,18 +200,45 @@ public class MateController : MonoBehaviour
                 {
                     if (hits.collider.gameObject.layer == 8)
                     {
-                        Debug.Log("敵以外に当たった");
+                        Debug.Log("rayが"+hits.collider.gameObject.name+"に当たった");
+                        unit = null;
                         break;
                     }
                     else
                     {
-                        Debug.Log("敵に当たった");
-                        unit = hits.collider.gameObject;
-                        // 敵に当たったらMoveに移行
-                        stateNo = 2;
-                        break;
-                    }
-                    
+                        Debug.Log("TagetPointをもつ"+hits.collider.gameObject.name+"に当たった");
+                        if (unit != null )
+                        {
+                            if (unit != hits.collider.gameObject)
+                            {
+                                unitPnt = unit.GetComponent<TargetPoint>();
+                                hitsPnt = hits.collider.gameObject.GetComponent<TargetPoint>();
+                                if (unitPnt.priority <= hitsPnt.priority)
+                                {
+                                    Debug.Log("先に当たった" + unitPnt.gameObject.name + "より今当たった" +
+                                        hitsPnt.gameObject.name + "のほうが優先度が高いよ");
+                                    unit = hits.collider.gameObject;
+                                }
+                                else
+                                {
+                                    Debug.Log("当たったけどもともとある" + unitPnt.gameObject.name +
+                                        "より優先度低いよ");
+                                }
+                                // 移動すべきobjに当たったらMoveに移行
+                                methodNo = 0;
+                                stateNo = (int)State.Move;
+                            }                           
+                        }
+                        else
+                        {
+                            unit = hits.collider.gameObject;
+                            Debug.Log("最初に当たったオブジェクト"+unit.gameObject.name);
+                            // 移動すべきobjに当たったらMoveに移行
+                            methodNo = 0;
+                            stateNo = (int)State.Move;
+                        }
+                        break;                       
+                    }                    
                 }
             }
         }
