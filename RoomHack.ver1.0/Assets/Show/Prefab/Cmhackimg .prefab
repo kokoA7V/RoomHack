@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 2331549895612436563}
   - component: {fileID: 6528053455677654546}
   - component: {fileID: 2228727377518660283}
+  - component: {fileID: -6728271297341934350}
   m_Layer: 5
   m_Name: 'Cmhackimg '
   m_TagString: Untagged
@@ -79,6 +80,18 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &-6728271297341934350
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 799148329011116238}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6fae2c64f02dd8e4ea3c09df1d43dd6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3427245153943266426
 GameObject:
   m_ObjectHideFlags: 0
