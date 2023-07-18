@@ -59,6 +59,19 @@ public class cctv : MonoBehaviour, IUnitHack
 
             mosic.SetActive(true);
         }
+        
+        // デバッグ用
+        if (Input.GetKeyDown(KeyCode.DownArrow))
+        {
+            if (hacked)
+            {
+                hacked = false;
+            }
+            else
+            {
+                hacked = true;
+            }
+        }
     }
 
     public void StatusDisp()
