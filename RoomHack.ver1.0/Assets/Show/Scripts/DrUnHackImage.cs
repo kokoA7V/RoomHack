@@ -9,7 +9,7 @@ public class DrUnHackImage : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        buttonObj = GameObject.Find("Button(Clone)");
+        buttonObj = GameObject.Find("DrButton(Clone)");
         bc = buttonObj.GetComponent<DrButtonController>();
     }
 

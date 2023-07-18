@@ -10,7 +10,6 @@ public class ScrollSystem : MonoBehaviour
 
     void Update()
     {
-        Debug.Log("“®‚¢‚½");
         //MouseWhell‚Ì’l‚ðscroll‚É‘ã“ü
         float scroll = Input.GetAxis("Mouse ScrollWheel");
         scrollRect.verticalNormalizedPosition += scroll * scrollSpd; 
