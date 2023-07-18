@@ -33,7 +33,6 @@ public class CircleArrowManager : MonoBehaviour
     {
         timer = oneSetTime * level;
         timeText.text = timer.ToString();
-        levelText.text = "LEVEL:" + level.ToString();        
     }
 
     void Update()
@@ -46,16 +45,13 @@ public class CircleArrowManager : MonoBehaviour
         if (level <= clearCount)
         {
             rotationStopFlg = true;
-            timeText.text = "ミッションクリア";
-            clearflag = false;
-            Debug.Log("クリア");
+            timeText.text = "-SUCCESS-";
             Destroy(gameObject, 1.0f); //クリアした後にギミックを消滅処理。by show
         }
         else if (timer <= 0)
         {
             rotationStopFlg = false;
-            timeText.text = "ミッション失敗";
-            missflag = false;
+            timeText.text = "失敗";
             Destroy(gameObject, 1.0f);
         }
         else
