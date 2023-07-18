@@ -12,6 +12,12 @@ public class CircleArrowManager : MonoBehaviour
     [HideInInspector]
     public bool rotationStopFlg = false;
 
+    [HideInInspector]
+    public bool clearflag = true;
+
+    [HideInInspector]
+    public bool missflag = true;
+
     public int level = 5;
     public int oneSetTime = 5;
     public float rotationSpeed = 5.0f;
@@ -27,25 +33,31 @@ public class CircleArrowManager : MonoBehaviour
     {
         timer = oneSetTime * level;
         timeText.text = timer.ToString();
-        levelText.text = "LEVEL:" + level.ToString();
     }
 
     void Update()
     {
+        Gimmck();
+    }
+
+    public void Gimmck()
+    {
         if (level <= clearCount)
         {
             rotationStopFlg = true;
-            timeText.text = "ミッションクリア";
+            timeText.text = "-SUCCESS-";
+            Destroy(gameObject, 1.0f); //クリアした後にギミックを消滅処理。by show
         }
-        else if(timer <= 0)
+        else if (timer <= 0)
         {
-            rotationStopFlg = true;
-            timeText.text = "ミッション失敗";
+            rotationStopFlg = false;
+            timeText.text = "失敗";
+            Destroy(gameObject, 1.0f);
         }
         else
         {
             time += Time.deltaTime;
-            if(time >= 1f)
+            if (time >= 1f)
             {
                 time = 0;
                 timer--;
