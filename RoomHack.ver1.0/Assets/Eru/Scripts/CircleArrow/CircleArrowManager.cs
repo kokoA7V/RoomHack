@@ -46,13 +46,16 @@ public class CircleArrowManager : MonoBehaviour
         {
             rotationStopFlg = true;
             timeText.text = "-SUCCESS-";
+            Debug.Log("SUCCESS");
             Destroy(gameObject, 1.0f); //クリアした後にギミックを消滅処理。by show
+            clearflag = true;
         }
         else if (timer <= 0)
         {
             rotationStopFlg = false;
             timeText.text = "失敗";
             Destroy(gameObject, 1.0f);
+            missflag = true;
         }
         else
         {

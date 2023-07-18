@@ -8,7 +8,7 @@ public class DrButtonController : MonoBehaviour
     GameObject instantiate;
     public bool drbuttonclick = false;
 
-
+    public GameObject gimmickObj;
 
     
     // Start is called before the first frame update
@@ -25,7 +25,7 @@ public class DrButtonController : MonoBehaviour
     public void OnClick()
     {
         Vector2 ver = instantiate.transform.position;
-        GameObject obj = Instantiate(CrickArrowPre, ver, Quaternion.identity); //Door用のギミック
+        gimmickObj = Instantiate(CrickArrowPre, ver, Quaternion.identity); //Door用のギミック
         drbuttonclick = true;
         Destroy(this.gameObject);
     }

@@ -7,7 +7,7 @@ public class CmStatusMng : MonoBehaviour, ICameraHackUnit
     //CameraのUI表示スクリプト
     public bool CmHacked { get; set; } = false; //interfaceで継承。
 
-    public GameObject CameraObj;
+    public GameObject CCTV;
 
     GameObject buttonobj;
     CmButtonController bc;
@@ -30,7 +30,7 @@ public class CmStatusMng : MonoBehaviour, ICameraHackUnit
     // Update is called once per frame
     void Update()
     {
-        
+        CmStatusDisp();
     }
     public void CmStatusDisp()
     {
@@ -39,7 +39,7 @@ public class CmStatusMng : MonoBehaviour, ICameraHackUnit
             Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             RaycastHit2D hit = Physics2D.Raycast(mousePosition, Vector2.zero);
 
-            if (hit.collider != null && hit.collider.gameObject == CameraObj && !CmHacked && !cmunhack) //まだHackしていない。
+            if (hit.collider != null && hit.collider.gameObject == CCTV && !CmHacked && !cmunhack) //まだHackしていない。
             {
                 Transform canvastrans = Canvas.transform;// SerializeFieldで取得
                 GameObject unhackdr = Instantiate(CmUnHackImage, canvastrans);
@@ -52,7 +52,7 @@ public class CmStatusMng : MonoBehaviour, ICameraHackUnit
                 bc = buttonobj.GetComponent<CmButtonController>();
                 cmunhack = true;
             }
-            else if (hit.collider != null && hit.collider.gameObject == CameraObj && CmHacked && !cmhack) //Hackし終わった後の処理
+            else if (hit.collider != null && hit.collider.gameObject == CCTV && CmHacked && !cmhack) //Hackし終わった後の処理
             {
                 Transform canvastrans = Canvas.transform;// SerializeFieldで取得
                 GameObject hackdr = Instantiate(CmHackImage, canvastrans);
