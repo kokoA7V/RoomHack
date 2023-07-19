@@ -3,17 +3,21 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class DrStatusMng : MonoBehaviour, IDoorHackUnit
+public class DrStatusMng : MonoBehaviour
 {
-    //DoorのUI表示スクリプト
-    public bool DrHacked { get; set; } = false;
+    public bool DrHacked = false;
     public GameObject DoorObj;
-    public GameObject gimmick;
+    GameObject drgimmick;
     public door doorSc;
-    bool isclearflag = false;
+    bool isclearflag;
 
+
+    GameObject buttonhackObj;
     GameObject buttonObj;
+    GameObject drhb;
+
     DrButtonController bc;
+    
 
     bool unhackCrick = false;
 
@@ -22,33 +26,35 @@ public class DrStatusMng : MonoBehaviour, IDoorHackUnit
     [SerializeField] GameObject DrUnhackImage;
     [SerializeField] GameObject DrHackImage;
     [SerializeField] GameObject DrButtonPre;
+    [SerializeField] GameObject DrHackButtonPre;
     [SerializeField] GameObject Canvas;
 
     void Start()
     {
         canvasTrans = Canvas.transform;
+        doorSc = gameObject.GetComponent<door>();
     }
     void Update()
     {
-        DrStatusDisp();
-        Debug.Log("q");
+        //DrStatusDisp();
     }
     public void DrStatusDisp()
     {
-        if (gimmick != null)
-        {
-            isclearflag = gimmick.GetComponent<CircleArrowManager>().clearflag;
-        }
-        if (isclearflag)
-        {
-            doorSc.hacked = true;
-        }
 
         Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         RaycastHit2D hit = Physics2D.Raycast(mousePosition, Vector2.zero);
-        Debug.Log(hit.collider);
 
-        if (Input.GetMouseButtonDown(0) &&  hit.collider != null && hit.collider.gameObject == DoorObj && !unhackCrick)
+        if (drgimmick != null)
+        {
+            isclearflag = drgimmick.GetComponent<CircleArrowManager>().clearflag;
+            Debug.Log(isclearflag);
+            if (isclearflag)
+            {
+                doorSc.hacked = true;
+            }
+        }
+
+        if (Input.GetMouseButtonDown(0) && hit.collider != null && hit.collider.gameObject == DoorObj)
         {
             doorSc = hit.collider.gameObject.GetComponent<door>();
 
@@ -62,11 +68,12 @@ public class DrStatusMng : MonoBehaviour, IDoorHackUnit
                 // ボタン生成
                 buttonObj = Instantiate(DrButtonPre, canvasTrans);
                 RectTransform buttonpos = buttonObj.GetComponent<RectTransform>();
-                gimmick = buttonObj.GetComponent<DrButtonController>().gimmickObj;
+
 
                 buttonpos.anchoredPosition = new Vector3(700, -230, 0);
                 bc = buttonObj.GetComponent<DrButtonController>();
-                unhackCrick = true;
+
+
             }
             else //Hackし終わった後の処理
             {
@@ -74,7 +81,25 @@ public class DrStatusMng : MonoBehaviour, IDoorHackUnit
                 GameObject hackdr = Instantiate(DrHackImage, canvasTrans);
                 RectTransform hackpos = hackdr.GetComponent<RectTransform>();
                 hackpos.anchoredPosition = new Vector3(542, -200, 0);
-            }
+
+                buttonhackObj = Instantiate(DrHackButtonPre, canvasTrans);
+                RectTransform buttonhackpos = buttonhackObj.GetComponent<RectTransform>();
+                buttonhackpos.anchoredPosition = new Vector3(700, -230, 0);
+             }
         }
+        if (buttonObj != null && buttonObj.GetComponent<DrButtonController>().drbuttonclick)
+        {
+            drgimmick = buttonObj.GetComponent<DrButtonController>().gimmickObj;
+        }
+        if (buttonhackObj != null && buttonhackObj.GetComponent<DrHackButton>().buttonClick)
+        {
+            doorSc.DoorOpen();
+        }
+        else if (buttonhackObj != null && !buttonhackObj.GetComponent<DrHackButton>().buttonClick) 
+        {
+            Debug.Log("wara");
+            doorSc.DoorClose();
+        }
+
     }
 }

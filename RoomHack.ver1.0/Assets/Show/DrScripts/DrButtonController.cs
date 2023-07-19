@@ -4,11 +4,10 @@ using UnityEngine;
 
 public class DrButtonController : MonoBehaviour
 {
-    public GameObject CrickArrowPre;
+    public GameObject CircleArrowPre;
+    public GameObject gimmickObj;
     GameObject instantiate;
     public bool drbuttonclick = false;
-
-    public GameObject gimmickObj;
 
     
     // Start is called before the first frame update
@@ -25,7 +24,7 @@ public class DrButtonController : MonoBehaviour
     public void OnClick()
     {
         Vector2 ver = instantiate.transform.position;
-        gimmickObj = Instantiate(CrickArrowPre, ver, Quaternion.identity); //Door用のギミック
+        gimmickObj = Instantiate(CircleArrowPre, ver, Quaternion.identity); //Door用のギミック
         drbuttonclick = true;
         Destroy(this.gameObject);
     }

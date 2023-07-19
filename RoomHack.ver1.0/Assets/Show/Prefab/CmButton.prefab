@@ -146,8 +146,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 418bc1107063c35419d51b7596c2bc88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DialPre: {fileID: 5523313454909910472, guid: 165dc4ac4f79d4c4389018847730a39f, type: 3}
-  drbuttonclick: 0
+  CircleArrowPre: {fileID: 8093135374142929870, guid: 204f791ea2e11a849878f48ebbd9bf7c, type: 3}
+  gimmickObj: {fileID: 0}
+  cmbuttonclick: 0
 --- !u!1 &2728927059808667087
 GameObject:
   m_ObjectHideFlags: 0

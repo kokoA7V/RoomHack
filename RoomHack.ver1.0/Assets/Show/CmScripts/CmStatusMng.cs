@@ -2,29 +2,33 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CmStatusMng : MonoBehaviour, ICameraHackUnit
+public class CmStatusMng : MonoBehaviour
 {
-    //CameraのUI表示スクリプト
-    public bool CmHacked { get; set; } = false; //interfaceで継承。
+    public bool CcHacked = false;
+    public GameObject CctvObj;
+    GameObject Ccgimmick;
+    public cctv CctvSc;
+    bool isclearflag;
 
-    public GameObject CCTV;
+    GameObject ccbuttonhackObj;
+    GameObject buttonObj;
+    GameObject cchb;
 
-    GameObject buttonobj;
-    CmButtonController bc;
+    CmButtonController cbc;
 
-    bool cmunhack = false;
-    bool cmhack = false;
+    Transform canvasTrans;
 
-
-    [SerializeField] GameObject CmUnHackImage;
-    [SerializeField] GameObject CmHackImage;
-    [SerializeField] GameObject CmButtonPre;
+    [SerializeField] GameObject CcUnHackImage;
+    [SerializeField] GameObject CcHackImage;
+    [SerializeField] GameObject CcButtonPre;
+    [SerializeField] GameObject CcHackButtonPre;
     [SerializeField] GameObject Canvas;
-
+   
     // Start is called before the first frame update
     void Start()
     {
-
+        canvasTrans = Canvas.transform;
+        CctvSc = gameObject.GetComponent<cctv>();
     }
 
     // Update is called once per frame
@@ -34,36 +38,63 @@ public class CmStatusMng : MonoBehaviour, ICameraHackUnit
     }
     public void CmStatusDisp()
     {
-        if (Input.GetMouseButtonDown(0))
+        Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        RaycastHit2D hit = Physics2D.Raycast(mousePosition, Vector2.zero);
+
+        if (Ccgimmick != null)
         {
-            Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            RaycastHit2D hit = Physics2D.Raycast(mousePosition, Vector2.zero);
-
-            if (hit.collider != null && hit.collider.gameObject == CCTV && !CmHacked && !cmunhack) //まだHackしていない。
+            isclearflag = Ccgimmick.GetComponent<CircleArrowManager>().clearflag;
+            Debug.Log(isclearflag);
+            if (isclearflag)
             {
-                Transform canvastrans = Canvas.transform;// SerializeFieldで取得
-                GameObject unhackdr = Instantiate(CmUnHackImage, canvastrans);
-                RectTransform unhackpos = unhackdr.GetComponent<RectTransform>();
-                unhackpos.anchoredPosition = new Vector3(542, -117, 0);
-
-                buttonobj = Instantiate(CmButtonPre, canvastrans);
-                RectTransform buttonpos = buttonobj.GetComponent<RectTransform>();
-                buttonpos.anchoredPosition = new Vector3(700, -180, 0);
-                bc = buttonobj.GetComponent<CmButtonController>();
-                cmunhack = true;
-            }
-            else if (hit.collider != null && hit.collider.gameObject == CCTV && CmHacked && !cmhack) //Hackし終わった後の処理
-            {
-                Transform canvastrans = Canvas.transform;// SerializeFieldで取得
-                GameObject hackdr = Instantiate(CmHackImage, canvastrans);
-                RectTransform hackpos = hackdr.GetComponent<RectTransform>();
-                hackpos.anchoredPosition = new Vector3(542, -117, 0);
-                cmhack = true;
-            }
-            else //そもそもHackが失敗しちゃったとき
-            {
-                cmunhack = false; //もう一度再挑戦！！
+                CctvSc.hacked = true;
             }
         }
+
+        if (Input.GetMouseButtonDown(0) && hit.collider != null && hit.collider.gameObject == CctvObj)
+        {
+            CctvSc = hit.collider.gameObject.GetComponent<cctv>();
+
+            if (!CctvSc.hacked) //まだHackしていない。
+            {
+                // UI表示
+                GameObject unhackdr = Instantiate(CcUnHackImage, canvasTrans);
+                RectTransform unhackpos = unhackdr.GetComponent<RectTransform>();
+                unhackpos.anchoredPosition = new Vector3(542, -200, 0);
+
+                // ボタン生成
+                buttonObj = Instantiate(CcButtonPre, canvasTrans);
+                RectTransform buttonpos = buttonObj.GetComponent<RectTransform>();
+
+
+                buttonpos.anchoredPosition = new Vector3(700, -230, 0);
+                cbc = buttonObj.GetComponent<CmButtonController>();
+
+
+            }
+            else //Hackし終わった後の処理
+            {
+                // UI表示
+                GameObject hackdr = Instantiate(CcHackImage, canvasTrans);
+                RectTransform hackpos = hackdr.GetComponent<RectTransform>();
+                hackpos.anchoredPosition = new Vector3(542, -200, 0);
+
+                ccbuttonhackObj = Instantiate(CcHackButtonPre, canvasTrans);
+                RectTransform buttonhackpos = ccbuttonhackObj.GetComponent<RectTransform>();
+                buttonhackpos.anchoredPosition = new Vector3(700, -230, 0);
+            }
+        }
+        if (buttonObj != null && buttonObj.GetComponent<CmButtonController>().cmbuttonclick)
+        {
+            Ccgimmick = buttonObj.GetComponent<CmButtonController>().gimmickObj;
+        }
+
+        if (ccbuttonhackObj != null && ccbuttonhackObj.GetComponent<CmHackButton>().ccbuttonClick)
+        {
+            Debug.Log("SPi");
+            CctvSc.Yes();
+            ccbuttonhackObj.GetComponent<CmHackButton>().ccbuttonClick = false;
+        }
+      
     }
 }

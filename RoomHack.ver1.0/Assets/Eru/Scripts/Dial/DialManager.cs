@@ -6,6 +6,8 @@ public class DialManager : MonoBehaviour
     [HideInInspector]
     public bool dial1, dial2, dial3, dial4, missFlg;
 
+    public bool dialclearflag = false;
+
     public Text timeText;
 
     public int timerLevel = 15;
@@ -38,6 +40,8 @@ public class DialManager : MonoBehaviour
         if (dial1 && dial2 && dial3 && dial4)
         {
             timeText.text = "ミッションクリア";
+            dialclearflag = true;
+
         }
         else if(timer <= 0)
         {

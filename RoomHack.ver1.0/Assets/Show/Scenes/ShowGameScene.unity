@@ -374,10 +374,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56e08b0fe94993140a160ae006fc38fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CCTV: {fileID: 315349326}
-  CmUnHackImage: {fileID: 5236405784279952220, guid: 1024c62a6bac33443b4eb75375355c56, type: 3}
-  CmHackImage: {fileID: 799148329011116238, guid: 5c7579905c2067a459d16a7b016a1ea3, type: 3}
-  CmButtonPre: {fileID: 2104324839521894837, guid: f467c3b54c99f39448d6701be91cecff, type: 3}
+  CcHacked: 0
+  CctvObj: {fileID: 315349326}
+  CctvSc: {fileID: 0}
+  CcUnHackImage: {fileID: 5236405784279952220, guid: 1024c62a6bac33443b4eb75375355c56, type: 3}
+  CcHackImage: {fileID: 5053555624406473865, guid: 7ccac7c7d49d9bf49b6fbe155721272f, type: 3}
+  CcButtonPre: {fileID: 2104324839521894837, guid: f467c3b54c99f39448d6701be91cecff, type: 3}
+  CcHackButtonPre: {fileID: 5053555624406473865, guid: 7ccac7c7d49d9bf49b6fbe155721272f, type: 3}
   Canvas: {fileID: 517312473}
 --- !u!1 &425251284
 GameObject:
@@ -1795,12 +1798,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f6da0c6031698247985b5abcc597d71, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  DrHacked: 0
   DoorObj: {fileID: 933101764}
-  gimmick: {fileID: 0}
   doorSc: {fileID: 0}
   DrUnhackImage: {fileID: 6874284604326285260, guid: f36fc703fefda1e4aa6b873a3f4448cc, type: 3}
   DrHackImage: {fileID: 8187229092546374856, guid: c48e23cd52250d44da64a1df94bf98ed, type: 3}
   DrButtonPre: {fileID: 1257317818819892515, guid: edbefbf733ba66647b07b612995ca0cf, type: 3}
+  DrHackButtonPre: {fileID: 21724486053360756, guid: c9304b3754bbb7f41b5fcb0c9280e957, type: 3}
   Canvas: {fileID: 517312473}
 --- !u!4 &2062262017
 Transform:

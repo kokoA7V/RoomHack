@@ -360,8 +360,8 @@ MonoBehaviour:
   inFlg: 0
   rotationFlg: 0
   rotationStopFlg: 0
-  clearflag: 1
-  missflag: 1
+  clearflag: 0
+  missflag: 0
   level: 5
   oneSetTime: 5
   rotationSpeed: 5

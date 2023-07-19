@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class cctv : MonoBehaviour, IUnitHack
+public class cctv : MonoBehaviour
 {
-    public bool hacked { get; set; } = false;
+    public bool hacked = false;
 
     GameObject mosic;
     public GameObject mosicPre;
@@ -44,6 +44,22 @@ public class cctv : MonoBehaviour, IUnitHack
     }
 
     private void Update()
+    { 
+        // デバッグ用
+        if (Input.GetKeyDown(KeyCode.DownArrow))
+        {
+            if (hacked)
+            {
+                hacked = false;
+            }
+            else
+            {
+                hacked = true;
+            }
+        }
+    }
+
+   public void Yes()
     {
         if (hacked)
         {
@@ -59,23 +75,5 @@ public class cctv : MonoBehaviour, IUnitHack
 
             mosic.SetActive(true);
         }
-        
-        // デバッグ用
-        if (Input.GetKeyDown(KeyCode.DownArrow))
-        {
-            if (hacked)
-            {
-                hacked = false;
-            }
-            else
-            {
-                hacked = true;
-            }
-        }
-    }
-
-    public void StatusDisp()
-    {
-
     }
 }

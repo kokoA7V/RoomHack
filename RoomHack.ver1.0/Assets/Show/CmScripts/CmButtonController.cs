@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class CmButtonController : MonoBehaviour
 {
-    public GameObject DialPre;
+    public GameObject CircleArrowPre;
+    public GameObject gimmickObj;
     GameObject instantiate;
     public bool cmbuttonclick = false;
 
@@ -25,7 +26,7 @@ public class CmButtonController : MonoBehaviour
     public void OnClick()
     {
         Vector2 ver = instantiate.transform.position;
-        GameObject obj = Instantiate(DialPre, ver, Quaternion.identity); //Door用のギミック
+        gimmickObj = Instantiate(CircleArrowPre, ver, Quaternion.identity); //Door用のギミック
         cmbuttonclick = true;
         Destroy(this.gameObject);
     }
