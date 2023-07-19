@@ -5,7 +5,9 @@ using UnityEngine;
 public class EnemyCheak : MonoBehaviour
 {
     private RaycastHit2D[] emHit;
-    public bool  EnemyCheck()
+
+    private GameObject pnt;
+    public bool EnemyCheck()
     {
         // Ray‚ğ¶¬
         Vector3 origin = this.gameObject.transform.position;
@@ -21,14 +23,31 @@ public class EnemyCheak : MonoBehaviour
         // ©•ªˆÈŠO‚É“–‚½‚é‚æ‚¤‚É‚·‚é
         int layerMask = ~(1 << gameObject.layer);
 
-        // ‰½‚©“–‚½‚Á‚½‚ç–¼‘O‚ğ•Ô‚·
+        // ‰½‚©“–‚½‚Á‚½‚çpnt‚Éonj‚ğ“ü‚ê‚é
         emHit = Physics2D.RaycastAll(emCheackray.origin, emCheackray.direction , maxDistance, layerMask);
         foreach (RaycastHit2D emHits in emHit)
         {
             if (emHits.collider != null)
             {
-                Debug.Log(emHits.collider.gameObject.name);
-                return true;
+                if (pnt != null)
+                {
+                    // pnt‚É“ü‚Á‚Ä‚é‚Ì‚Æ“¯‚¶‚¾‚Á‚½‚ç
+                    if (pnt == emHits.collider.gameObject)
+                    {
+                        return false;
+                    }
+                    else
+                    {
+                        pnt = emHits.collider.gameObject;
+                        return true;
+                    }
+                }
+                // Å‰‚Í‚±‚Á‚¿‚É—ˆ‚é
+                else
+                {
+                    pnt = emHits.collider.gameObject;
+                    return true;
+                }
             }
         }
         return false;

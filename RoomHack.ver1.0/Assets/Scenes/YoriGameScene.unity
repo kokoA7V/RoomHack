@@ -1963,6 +1963,10 @@ PrefabInstance:
       value: 256
       objectReference: {fileID: 0}
     - target: {fileID: 6929050727563301704, guid: ffdd422f26c4e514086a7fab71d70d80, type: 3}
+      propertyPath: m_BodyType
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6929050727563301704, guid: ffdd422f26c4e514086a7fab71d70d80, type: 3}
       propertyPath: m_Constraints
       value: 4
       objectReference: {fileID: 0}

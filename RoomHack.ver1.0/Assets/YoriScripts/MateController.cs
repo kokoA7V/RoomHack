@@ -68,7 +68,7 @@ public class MateController : MonoBehaviour
     {
         if (emCheak.EnemyCheck() && isEm)
         {
-            Debug.Log("もうすぐ止まるよ");
+            Debug.Log("waitに移行");
             methodNo = 0;
             stateNo = (int)State.Wait;
             isEm = false;
@@ -82,20 +82,21 @@ public class MateController : MonoBehaviour
         switch (methodNo)
         {
             case 0:
-                methodCtr = 0.2f;
-                methodNo++;
                 Debug.Log("待ちに移行");
+
+                plRb.velocity = Vector2.zero;
+                methodCtr = 1.5f;
+                methodNo++;
                 break;
             case 1:
                 methodCtr -= Time.deltaTime;
-                if (methodCtr <= 0)
+                if (methodCtr<=0)
                 {
-                    plRb.velocity = Vector3.zero;
                     plRb.isKinematic = true;
                     Debug.Log("完全に止まった");
                     isEm = true;
                     methodNo++;
-                }
+                }    
                 break;
             case 2:
                 Debug.Log("もう動けるよ");
@@ -154,16 +155,8 @@ public class MateController : MonoBehaviour
         }
     }
 
-    //private void OnTriggerExit2D(Collider2D collision)
-    //{
-    //    Debug.Log("待ちに移行");
-    //    plRb.velocity = Vector3.zero;
-    //    plRb.isKinematic = false;
-    //    stateNo = (int)State.Wait;
-    //}
+
     // いずれ別のクラスにするそれまではここ
-
-
     private void OnTriggerStay2D(Collider2D collision)
     {
         //Debug.Log("atattayo");
