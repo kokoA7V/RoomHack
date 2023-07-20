@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class bullet : MonoBehaviour
 {
+
+
+
     private void Update()
     {
         Vector3 pos = this.transform.position;

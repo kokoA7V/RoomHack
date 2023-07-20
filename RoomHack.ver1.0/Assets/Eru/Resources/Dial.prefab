@@ -741,7 +741,7 @@ Transform:
   m_GameObject: {fileID: 5523313454909910472}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.75, y: 0.75, z: 1}
+  m_LocalScale: {x: 0.3, y: 0.3, z: 1}
   m_Children:
   - {fileID: 5523313455399958239}
   - {fileID: 5523313454085177607}
@@ -769,6 +769,7 @@ MonoBehaviour:
   dial3: 0
   dial4: 0
   missFlg: 0
+  dialclearflag: 0
   timeText: {fileID: 3934288908528045720}
   timerLevel: 10
 --- !u!1 &5523313455399958233
