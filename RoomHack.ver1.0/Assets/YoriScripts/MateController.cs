@@ -14,8 +14,8 @@ public class MateController : MonoBehaviour
 
     EnemyCheak emCheak;
 
-    TargetPoint hitsPnt;
-    TargetPoint unitPnt;
+    private TargetPoint hitsPnt;
+    private TargetPoint unitPnt;
 
     private Rigidbody2D plRb;
 
@@ -67,6 +67,8 @@ public class MateController : MonoBehaviour
         plRb = GetComponent<Rigidbody2D>();
 
         emCheak = GetComponent<EnemyCheak>();
+
+        unit = null;
     }
 
     void Update()
@@ -220,7 +222,7 @@ public class MateController : MonoBehaviour
                     if (hits.collider.gameObject.layer == 8)
                     {
                         Debug.Log("ray‚ª"+hits.collider.gameObject.name+"‚É“–‚½‚Á‚½");
-                        unit = null;
+                        //unit = null;
                         break;
                     }
                     else
@@ -232,21 +234,25 @@ public class MateController : MonoBehaviour
                             {
                                 unitPnt = unit.GetComponent<TargetPoint>();
                                 hitsPnt = hits.collider.gameObject.GetComponent<TargetPoint>();
-                                if (unitPnt.priority <= hitsPnt.priority)
+                               
+                                if (hitsPnt != null)
                                 {
-                                    Debug.Log("æ‚É“–‚½‚Á‚½" + unitPnt.gameObject.name + "‚æ‚è¡“–‚½‚Á‚½" +
-                                        hitsPnt.gameObject.name + "‚Ì‚Ù‚¤‚ª—Dæ“x‚ª‚‚¢‚æ");
-                                    unit = hits.collider.gameObject;
+                                    if (unitPnt.priority <= hitsPnt.priority)
+                                    {
+                                        Debug.Log("æ‚É“–‚½‚Á‚½" + unitPnt.gameObject.name + "‚æ‚è¡“–‚½‚Á‚½" +
+                                            hitsPnt.gameObject.name + "‚Ì‚Ù‚¤‚ª—Dæ“x‚ª‚‚¢‚æ");
+                                        unit = hits.collider.gameObject;
+                                    }
+                                    else
+                                    {
+                                        Debug.Log("“–‚½‚Á‚½‚¯‚Ç‚à‚Æ‚à‚Æ‚ ‚é" + unitPnt.gameObject.name +
+                                            "‚æ‚è—Dæ“x’á‚¢‚æ");
+                                    }
+                                    // ˆÚ“®‚·‚×‚«obj‚É“–‚½‚Á‚½‚çMove‚ÉˆÚs
+                                    methodNo = 0;
+                                    //stateNo = (int)State.Move;
                                 }
-                                else
-                                {
-                                    Debug.Log("“–‚½‚Á‚½‚¯‚Ç‚à‚Æ‚à‚Æ‚ ‚é" + unitPnt.gameObject.name +
-                                        "‚æ‚è—Dæ“x’á‚¢‚æ");
-                                }
-                                // ˆÚ“®‚·‚×‚«obj‚É“–‚½‚Á‚½‚çMove‚ÉˆÚs
-                                methodNo = 0;
-                                //stateNo = (int)State.Move;
-                            }                           
+                            }
                         }
                         else
                         {

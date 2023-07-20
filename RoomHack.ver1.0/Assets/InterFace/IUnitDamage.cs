@@ -4,9 +4,9 @@ using UnityEngine;
 
 public interface IUnitDamage
 {
-    public float maxHP{ get; set; }
-    public float nowHP{ get; set; }
+    public int maxHP{ get; set; }
+    public int nowHP{ get; set; }
     public int dmgLayer { get; set; }
-    public void HitDmg();
+    public void HitDmg(int dmg);
     public void Die();
 }

@@ -18,7 +18,7 @@ public class EnemyCheak : MonoBehaviour
         Debug.DrawRay(emCheackray.origin, emCheackray.direction , Color.blue);
 
         // ray‚Ì‹——£‚ğ§ŒÀ
-        float maxDistance = 0.3f;
+        float maxDistance = 0.7f;
 
         // ©•ªˆÈŠO‚É“–‚½‚é‚æ‚¤‚É‚·‚é
         int layerMask = ~(1 << gameObject.layer);

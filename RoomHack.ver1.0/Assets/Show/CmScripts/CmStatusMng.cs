@@ -43,6 +43,7 @@ public class CmStatusMng : MonoBehaviour
 
         if (Ccgimmick != null)
         {
+            // —v‰ü‘P
             isclearflag = Ccgimmick.GetComponent<CircleArrowManager>().clearflag;
             Debug.Log(isclearflag);
             if (isclearflag)

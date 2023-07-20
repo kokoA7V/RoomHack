@@ -10,6 +10,7 @@ public class ClickTimingManager : MonoBehaviour
     public int time = 15;
     public float countTime = 0.25f;
     public int rand = 75;
+    public bool clearflag=false;
 
     public GameObject rod, pointer;
     public Text text;
@@ -60,6 +61,7 @@ public class ClickTimingManager : MonoBehaviour
     {
         if (checkFlg.All(b => b))
         {
+            clearflag = true;
             text.fontSize = 150;
             text.text = "‰ğœ";
             return;

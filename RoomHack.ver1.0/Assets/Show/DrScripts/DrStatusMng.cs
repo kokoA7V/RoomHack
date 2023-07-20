@@ -36,7 +36,7 @@ public class DrStatusMng : MonoBehaviour
     }
     void Update()
     {
-        //DrStatusDisp();
+        DrStatusDisp();
     }
     public void DrStatusDisp()
     {
