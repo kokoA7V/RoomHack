@@ -378,7 +378,7 @@ MonoBehaviour:
   CctvObj: {fileID: 315349326}
   CctvSc: {fileID: 0}
   CcUnHackImage: {fileID: 5236405784279952220, guid: 1024c62a6bac33443b4eb75375355c56, type: 3}
-  CcHackImage: {fileID: 5053555624406473865, guid: 7ccac7c7d49d9bf49b6fbe155721272f, type: 3}
+  CcHackImage: {fileID: 799148329011116238, guid: 5c7579905c2067a459d16a7b016a1ea3, type: 3}
   CcButtonPre: {fileID: 2104324839521894837, guid: f467c3b54c99f39448d6701be91cecff, type: 3}
   CcHackButtonPre: {fileID: 5053555624406473865, guid: 7ccac7c7d49d9bf49b6fbe155721272f, type: 3}
   Canvas: {fileID: 517312473}
