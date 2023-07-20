@@ -10,6 +10,7 @@ public class BulletController : MonoBehaviour,IUnitDamage
 
     void Start()
     {
+        Destroy(gameObject, 4);
         maxHP = 1;
         nowHP = maxHP;
     }

@@ -292,11 +292,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8484085580889226523, guid: 697761b798a50724e9aef2cd5f475338, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -4.94
+      value: -4.79
       objectReference: {fileID: 0}
     - target: {fileID: 8484085580889226523, guid: 697761b798a50724e9aef2cd5f475338, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1
+      value: -2.9
       objectReference: {fileID: 0}
     - target: {fileID: 8484085580889226523, guid: 697761b798a50724e9aef2cd5f475338, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1723,6 +1723,23 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 7
+--- !u!1 &1871155073 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8484085580889226525, guid: 697761b798a50724e9aef2cd5f475338, type: 3}
+  m_PrefabInstance: {fileID: 8484085581752639998}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1871155079
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1871155073}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbc1eef680b92024792283d68df81313, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1949020923
 GameObject:
   m_ObjectHideFlags: 0
@@ -1908,7 +1925,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1919298312665203071, guid: ffdd422f26c4e514086a7fab71d70d80, type: 3}
       propertyPath: limitSpeed
-      value: 20
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 6929050727563301682, guid: ffdd422f26c4e514086a7fab71d70d80, type: 3}
       propertyPath: m_Name
@@ -1963,12 +1980,20 @@ PrefabInstance:
       value: 256
       objectReference: {fileID: 0}
     - target: {fileID: 6929050727563301704, guid: ffdd422f26c4e514086a7fab71d70d80, type: 3}
+      propertyPath: m_Mass
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 6929050727563301704, guid: ffdd422f26c4e514086a7fab71d70d80, type: 3}
       propertyPath: m_BodyType
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6929050727563301704, guid: ffdd422f26c4e514086a7fab71d70d80, type: 3}
       propertyPath: m_Constraints
       value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6929050727563301704, guid: ffdd422f26c4e514086a7fab71d70d80, type: 3}
+      propertyPath: m_GravityScale
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ffdd422f26c4e514086a7fab71d70d80, type: 3}

@@ -8,16 +8,16 @@ public class UnitCore : MonoBehaviour, IUnitMove, IUnitShot, IUnitHack, IUnitDam
     public float nowHP { get; set; }
     public int dmgLayer{ get; set; }
 
-    public float moveSpd { get; set; } = 0.3f;
+    public float moveSpd { get; set; } = 1.5f;
 
 
     public bool hacked { get; set; } = false;
     
     public void HitDmg() { }
     public void Die() { }
-    public void Shot(int layer, float pow)
+    public void Shot(int layer, int pow,int burst)
     {
-        
+        GetComponent<Shot>().UnitShot(layer, pow, burst);
     }
 
     public void StatusDisp()
@@ -27,6 +27,6 @@ public class UnitCore : MonoBehaviour, IUnitMove, IUnitShot, IUnitHack, IUnitDam
 
     public void Move(float moveSpd,GameObject unit)
     {
-        GetComponent<Move>().UnitMove(moveSpd,unit);
+        GetComponent<Move>().DemoMove(moveSpd,unit);
     }
 }

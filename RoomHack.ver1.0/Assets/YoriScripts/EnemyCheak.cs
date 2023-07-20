@@ -18,7 +18,7 @@ public class EnemyCheak : MonoBehaviour
         Debug.DrawRay(emCheackray.origin, emCheackray.direction , Color.blue);
 
         // ray‚Ì‹——£‚ğ§ŒÀ
-        float maxDistance = 0.03f;
+        float maxDistance = 0.3f;
 
         // ©•ªˆÈŠO‚É“–‚½‚é‚æ‚¤‚É‚·‚é
         int layerMask = ~(1 << gameObject.layer);
@@ -29,25 +29,29 @@ public class EnemyCheak : MonoBehaviour
         {
             if (emHits.collider != null)
             {
-                if (pnt != null)
-                {
-                    // pnt‚É“ü‚Á‚Ä‚é‚Ì‚Æ“¯‚¶‚¾‚Á‚½‚ç
-                    if (pnt == emHits.collider.gameObject)
-                    {
-                        return false;
-                    }
-                    else
-                    {
-                        pnt = emHits.collider.gameObject;
-                        return true;
-                    }
-                }
-                // Å‰‚Í‚±‚Á‚¿‚É—ˆ‚é
-                else
-                {
-                    pnt = emHits.collider.gameObject;
-                    return true;
-                }
+                Debug.Log(emHits.collider.gameObject.name+"‚ğŒŸ’m‚µ‚½");
+                if (emHits.collider.gameObject.TryGetComponent<IUnitDamage>(out var damageable)) return true ;
+                else return false;
+                //if (pnt != null)
+                //{
+
+                //    //pnt‚É“ü‚Á‚Ä‚é‚Ì‚Æ“¯‚¶‚¾‚Á‚½‚ç
+                //    if (pnt == emHits.collider.gameObject)
+                //    {
+                //        return false;
+                //    }
+                //    else
+                //    {
+                //        pnt = emHits.collider.gameObject;
+                //        return true;
+                //    }
+                //}
+                //// Å‰‚Í‚±‚Á‚¿‚É—ˆ‚é
+                //else
+                //{
+                //    pnt = emHits.collider.gameObject;
+                //    return true;
+                //}
             }
         }
         return false;

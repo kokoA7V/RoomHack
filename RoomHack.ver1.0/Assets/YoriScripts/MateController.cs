@@ -27,7 +27,7 @@ public class MateController : MonoBehaviour
     private ActFunc[] actFuncTbl;
 
     private float moveSpd;
-    private float pow;
+    private int pow;
 
     // 
     private GameObject unit;
@@ -35,6 +35,8 @@ public class MateController : MonoBehaviour
     private float methodCtr = 0;
 
     private bool isEm = true;
+
+    private int burst;
 
     enum State
     {
@@ -47,15 +49,18 @@ public class MateController : MonoBehaviour
     void Start()
     {
         mateCore = GetComponent<UnitCore>();
+        
         moveSpd = mateCore.moveSpd;
         mateCore.dmgLayer = 1;
+        burst = 3;
+       
         actFuncTbl = new ActFunc[(int)State.Num];
         actFuncTbl[(int)State.Wait] = ActWait;
         actFuncTbl[(int)State.Shot] = ActShot;
         actFuncTbl[(int)State.Move] = ActMove;
         actFuncTbl[(int)State.Search] = ActSearch;
 
-        stateNo = (int)State.Wait;
+        stateNo = (int)State.Search;
 
         moveSpd = 10;
 
@@ -66,16 +71,11 @@ public class MateController : MonoBehaviour
 
     void Update()
     {
-        if (emCheak.EnemyCheck() && isEm)
-        {
-            Debug.Log("waitに移行");
-            methodNo = 0;
-            stateNo = (int)State.Wait;
-            isEm = false;
-        }
-        
+
+
         actFuncTbl[stateNo]();
         //Debug.Log("ugoiteru");
+        ActMove();
     }
     private void ActWait()
     {
@@ -107,50 +107,76 @@ public class MateController : MonoBehaviour
     }
     private void ActShot()
     {
-        mateCore.Shot(mateCore.dmgLayer, pow);
-    }
-    private void ActMove()
-    {
         switch (methodNo)
         {
             case 0:
-                methodCtr = 6;
+                Debug.Log("Shotに移行");
+                mateCore.Shot(mateCore.dmgLayer, pow, burst);
+                methodCtr = 1.5f;
                 methodNo++;
                 break;
             case 1:
-                if (unit != null)
+                methodCtr -= Time.deltaTime;
+                if (methodCtr<=0)
                 {
-                    Debug.Log("Move");
-                    mateCore.Move(moveSpd, unit);
-
-                    methodCtr -= Time.deltaTime;
+                    methodNo = 0;
+                    methodCtr = 0;
+                    stateNo = (int)State.Search;
+                    isEm = true;
                 }
-                else
-                {
-                    Debug.Log("unit = NULL");
-                    plRb.velocity = Vector3.zero;
-                    stateNo = 0;
-                }
-                if (methodCtr <= 0)
-                {
-                    Debug.Log("とまるよ");
-                    plRb.velocity = Vector3.zero;
-                    plRb.isKinematic = true;
-                    unit = null;
-                    methodNo++;
-                }
-                break;
-            case 2:
-                plRb.isKinematic = false;
                 break;
         }
+    }
+    private void ActMove()
+    {
+        mateCore.Move(moveSpd, unit);
+        //switch (methodNo)
+        //{
+        //    case 0:
+        //        methodCtr = 6;
+        //        methodNo++;
+        //        break;
+        //    case 1:
+        //        if (unit != null)
+        //        {
+        //            Debug.Log("Move");
+        //            mateCore.Move(moveSpd, unit);
+
+        //            methodCtr -= Time.deltaTime;
+        //        }
+        //        else
+        //        {
+        //            Debug.Log("unit = NULL");
+        //            plRb.velocity = Vector3.zero;
+        //            stateNo = 0;
+        //        }
+        //        if (methodCtr <= 0)
+        //        {
+        //            Debug.Log("とまるよ");
+        //            plRb.velocity = Vector3.zero;
+        //            plRb.isKinematic = true;
+        //            unit = null;
+        //            methodNo++;
+        //        }
+        //        break;
+        //    case 2:
+        //        plRb.isKinematic = false;
+        //        break;
+        //}
     }
     void ActSearch()
     {
         switch (methodNo)
         {
             case 0:
-
+                if (emCheak.EnemyCheck() && isEm)
+                {
+                    //Debug.Log("Shotに移行");
+                    methodNo = 0;
+                    methodCtr = 0;
+                    stateNo = (int)State.Shot;
+                    isEm = false;
+                }
                 break;
         }
     }
@@ -219,7 +245,7 @@ public class MateController : MonoBehaviour
                                 }
                                 // 移動すべきobjに当たったらMoveに移行
                                 methodNo = 0;
-                                stateNo = (int)State.Move;
+                                //stateNo = (int)State.Move;
                             }                           
                         }
                         else
@@ -228,7 +254,7 @@ public class MateController : MonoBehaviour
                             Debug.Log("最初に当たったオブジェクト"+unit.gameObject.name);
                             // 移動すべきobjに当たったらMoveに移行
                             methodNo = 0;
-                            stateNo = (int)State.Move;
+                            //stateNo = (int)State.Move;
                         }
                         break;                       
                     }                    

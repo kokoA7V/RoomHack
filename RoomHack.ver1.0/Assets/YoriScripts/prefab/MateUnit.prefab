@@ -98,6 +98,7 @@ GameObject:
   - component: {fileID: 6929050727563301687}
   - component: {fileID: 6929050727563301704}
   - component: {fileID: 1919298312665203071}
+  - component: {fileID: 5775106252436386477}
   m_Layer: 0
   m_Name: MateUnit
   m_TagString: Untagged
@@ -248,3 +249,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   limitSpeed: 200
+--- !u!114 &5775106252436386477
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6929050727563301682}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c4e279a16958d449a66c57f7be78268, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bulletPrefab: {fileID: 1180927379680373027, guid: 7972d845971e34048a0c32d4a2068c2d, type: 3}
+  bulletSpeed: 5
+  shotTime: 0.3
