@@ -39,10 +39,12 @@ public class ClickTimingManager : MonoBehaviour
         for (int i = 0; i < level; i++)
         {
             GameObject tmp = Instantiate(rod, transform.position, Quaternion.identity);
+            tmp.transform.parent = this.transform;
             rodObj[i] = tmp;
             rodObj[i].GetComponent<Transform>().Rotate(0, 0, r * count);
 
             tmp = Instantiate(pointer, transform.position, Quaternion.identity);
+            tmp.transform.parent = this.transform;
             poiObj[i] = tmp;
             poiObj[i].GetComponent<Transform>().Rotate(0, 0, r * count);
 
