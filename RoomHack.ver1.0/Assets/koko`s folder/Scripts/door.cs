@@ -57,6 +57,7 @@ public class door : MonoBehaviour, IUnitHack
             dDR_Enemy.SetActive(true);
         }
 
+        // デバッグ用
         if (Input.GetKeyDown(KeyCode.UpArrow))
         {
             if (open)
@@ -74,7 +75,7 @@ public class door : MonoBehaviour, IUnitHack
         }
     }
 
-    void DoorOpen()
+    public void DoorOpen()
     {
         if (close == true)
         {
@@ -106,7 +107,7 @@ public class door : MonoBehaviour, IUnitHack
         }
     }
 
-    void DoorClose()
+    public void DoorClose()
     {
         if (open == true)
         {
