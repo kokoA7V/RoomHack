@@ -17,20 +17,17 @@ public class cctv : MonoBehaviour
     private void Start()
     {
         mosic = transform.GetChild(0).gameObject;
-<<<<<<< HEAD
-=======
         CCTV_Mate = transform.GetChild(1).gameObject;
         CCTV_Enemy = transform.GetChild(2).gameObject;
->>>>>>> main
 
         Vector2 startPos = this.transform.position;
         startPos.x += areaPos.x < 0 ? areaPos.x : 0;
         startPos.y += areaPos.y < 0 ? areaPos.y : 0;
 
-<<<<<<< HEAD
+
         //GameObject temp = (GameObject)Instantiate(mosicPre, nowPos, Quaternion.identity);
         //temp.transform.parent = mosic.transform;
-=======
+
         Vector2 endPos = this.transform.position;
         endPos.x += areaPos.x > 0 ? areaPos.x : 0;
         endPos.y += areaPos.y > 0 ? areaPos.y : 0;
@@ -48,7 +45,7 @@ public class cctv : MonoBehaviour
                 temp.transform.parent = mosic.transform;
             }
         }
->>>>>>> main
+
     }
 
     private void Update()
