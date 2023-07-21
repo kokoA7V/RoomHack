@@ -2,14 +2,15 @@ using UnityEngine;
 
 public class BulletController : MonoBehaviour,IUnitDamage
 {
-    public float maxHP { get; set; }
-    public float nowHP { get; set; }
-    public int dmgLayer { get; set; }
+    public int maxHP { get; set; }
+    public int nowHP { get; set; }
+    public int dmgLayer { get; set; } = 3;
 
     public int pow;
 
     void Start()
     {
+        Destroy(gameObject, 4);
         maxHP = 1;
         nowHP = maxHP;
     }
@@ -20,13 +21,13 @@ public class BulletController : MonoBehaviour,IUnitDamage
         {
             if(this.dmgLayer != damage.dmgLayer)
             {
-                damage.HitDmg();
-                this.HitDmg();
+                damage.HitDmg(1);
+                this.HitDmg(1);
             }
         }
     }
 
-    public void HitDmg()
+    public void HitDmg(int dmg)
     {
         nowHP--;
         if (nowHP <= 0)
