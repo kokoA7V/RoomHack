@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CmUnhackImage : MonoBehaviour
+public class CmUnHackImage : MonoBehaviour
 {
     GameObject cmbuttonObj;
     CmButtonController cc;

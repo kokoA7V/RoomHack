@@ -53,7 +53,7 @@ public class Move : MonoBehaviour
             // —Í‚Ì‰Á‚í‚é•ûŒü‚É³–Ê‚ğ‡‚í‚¹‚é
             transform.up = movePos.normalized;
         }
-        else
+        else if(moveX != 0||moveZ != 0)
         {
             transform.up = new Vector2(moveX , moveZ ).normalized;
         }

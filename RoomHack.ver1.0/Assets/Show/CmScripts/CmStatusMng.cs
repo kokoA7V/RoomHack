@@ -9,6 +9,7 @@ public class CmStatusMng : MonoBehaviour
     GameObject Ccgimmick;
     public cctv CctvSc;
     bool isclearflag;
+    bool crick = false;
 
     GameObject ccbuttonhackObj;
     GameObject buttonObj;
@@ -70,8 +71,6 @@ public class CmStatusMng : MonoBehaviour
 
                 buttonpos.anchoredPosition = new Vector3(700, -230, 0);
                 cbc = buttonObj.GetComponent<CmButtonController>();
-
-
             }
             else //HackÇµèIÇÌÇ¡ÇΩå„ÇÃèàóù
             {

@@ -9,7 +9,9 @@ public class DrStatusMng : MonoBehaviour
     public GameObject DoorObj;
     GameObject drgimmick;
     public door doorSc;
+
     bool isclearflag;
+    bool crick = false;
 
 
     GameObject buttonhackObj;
@@ -53,9 +55,9 @@ public class DrStatusMng : MonoBehaviour
                 doorSc.hacked = true;
             }
         }
-
         if (Input.GetMouseButtonDown(0) && hit.collider != null && hit.collider.gameObject == DoorObj)
         {
+            Debug.Log("seikou");
             doorSc = hit.collider.gameObject.GetComponent<door>();
 
             if (!doorSc.hacked) //Ç‹ÇæHackÇµÇƒÇ¢Ç»Ç¢ÅB
@@ -72,8 +74,7 @@ public class DrStatusMng : MonoBehaviour
 
                 buttonpos.anchoredPosition = new Vector3(700, -230, 0);
                 bc = buttonObj.GetComponent<DrButtonController>();
-
-
+                
             }
             else //HackÇµèIÇÌÇ¡ÇΩå„ÇÃèàóù
             {
@@ -100,6 +101,5 @@ public class DrStatusMng : MonoBehaviour
             Debug.Log("wara");
             doorSc.DoorClose();
         }
-
     }
 }
